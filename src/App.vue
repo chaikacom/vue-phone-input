@@ -1,17 +1,24 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <phone-input v-model="phone"></phone-input>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PhoneInput from './components/PhoneInput/PhoneInput.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+      PhoneInput
+  },
+  data() {
+    return {
+        phone: ''
+    }
   }
 }
 </script>

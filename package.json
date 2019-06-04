@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name phoneinput ./src/components/PhoneInput/PhoneInput.vue",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "libphonenumber-js": "^1.7.18"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
