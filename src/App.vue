@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <div>
-      <phone-input v-model="phone"></phone-input>
+      <phone-input v-model="phone" focus-on-select></phone-input>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-        phone: ''
+        phone: null,
     }
   }
 }
