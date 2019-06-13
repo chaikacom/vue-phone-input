@@ -70,9 +70,10 @@
                 country: this.defaultCountry,
                 open: false,
                 countries,
-                focus: false
+                focus: false,
             }
         },
+
 
         beforeMount() {
             document.addEventListener('click', this.onClickOutside)
@@ -116,8 +117,9 @@
                 return parsePhoneNumberFromString(String(this.value), this.country)
             },
             isValid() {
-                if(!this.number) return false;
-                return this.number.isValid()
+                const valid = !this.number || !this.number.isValid()  ? false : true
+                this.$emit('validation', valid)
+                return valid
             },
             classList() {
                 return {
