@@ -6,6 +6,18 @@
 .phone-input__dropdown-button {
   display: inline-block;
   vertical-align: middle;
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  height: 1em;
+  line-height: 1em;
+}
+
+.phone-input__dropdown-button-icon {
+  vertical-align: middle;
 }
 
 .phone-input__input {
@@ -17,4 +29,9 @@
   position: absolute;
   left: 0;
   top: 100%;
+}
+
+.phone-input__dropdown-options-code {
+  opacity: 0.5;
+  margin-left:0.5em;
 }

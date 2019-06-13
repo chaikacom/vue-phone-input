@@ -5,7 +5,9 @@
                 aria-label="Выбрать формат номера"
                 @click.stop="openDropdown"
                 :tabindex="focusOnSelect ? 0 : -1">
-            <slot name="caret">•</slot>
+            <slot name="caret">
+                <span class="phone-input__dropdown-button-icon iti-flag" :class="country.toLowerCase()"></span>
+            </slot>
         </button>
 
         <div class="phone-input__dropdown" v-show="open" @click.stop>
@@ -19,7 +21,15 @@
                          class="phone-input__select"
                          :custom-label="getCountryName"
                          v-model="country">
-                <template slot="singleLabel">{{ getCountryName(country) }}</template>
+                <template slot="singleLabel">
+                    {{ getCountryName(country) }}
+                </template>
+                <template slot="option" slot-scope="{ option }">
+                    <div class="phone-input__dropdown-option">
+                        <span class="phone-input__dropdown-option-name">{{ getCountryName(option) }}</span>
+                        <span class="phone-input__dropdown-options-code">+{{ getCountryCallingCode(option) }}</span>
+                    </div>
+                </template>
             </multiselect>
         </div>
 
