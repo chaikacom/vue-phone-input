@@ -1,0 +1,20 @@
+.phone-input {
+  position: relative;
+  display: inline-block;
+}
+
+.phone-input__dropdown-button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.phone-input__input {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.phone-input__dropdown {
+  position: absolute;
+  left: 0;
+  top: 100%;
+}

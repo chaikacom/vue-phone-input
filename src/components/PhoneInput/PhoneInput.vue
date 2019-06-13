@@ -32,7 +32,7 @@
 
 <script>
     import locale from './locale/ru.json'
-    import Multiselect from 'vue-multiselect/dist/vue-multiselect.min'
+    import Multiselect from 'vue-multiselect'
     import examples from 'libphonenumber-js/examples.mobile.json.js'
     import meta from 'libphonenumber-js/metadata.mobile.json.js'
     import {
@@ -139,6 +139,6 @@
 
 <style lang="scss">
     @import "~vue-multiselect/dist/vue-multiselect.min.css";
-    @import "./index.scss";
-    @import "./sprite.scss";
+    @import "./stylesheets/index.scss";
+    @import "./stylesheets/sprite.scss";
 </style>
