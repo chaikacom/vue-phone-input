@@ -26,11 +26,15 @@
         <input type="text"
                ref="input"
                v-model="phone"
+               v-bind="attrs"
+               @focus="onInputFocus"
+               @blur="onInputBlur"
                class="phone-input__input">
     </div>
 </template>
 
 <script>
+    import propsMixin from './propsMixin'
     import locale from './locale/ru.json'
     import Multiselect from 'vue-multiselect'
     import examples from 'libphonenumber-js/examples.mobile.json.js'
@@ -46,27 +50,17 @@
     const countries = Object.keys(meta.countries).map(key => key)
 
     export default {
+        mixins: [propsMixin],
         components: {
             Multiselect
-        },
-
-        props: {
-            defaultCountry: { type: String, default: 'RU' },
-            value: {
-                default: '',
-                validator: prop => {
-                    return (['string', 'number'].indexOf(typeof prop) >= 0) || prop === null
-                }
-            },
-            lang: { type: String, default: 'RU' },
-            focusOnSelect: { type: Boolean, default: false }
         },
 
         data() {
             return {
                 country: this.defaultCountry,
                 open: false,
-                countries
+                countries,
+                focus: false
             }
         },
 
@@ -79,17 +73,27 @@
         },
 
         computed: {
+            attrs () {
+                const { ...attrs } = this.$attrs
+                return attrs
+            },
+            prefix () {
+                return `+${this.callingCode}`
+            },
+            hideValue () {
+                const isEmpty = this.value === this.prefix || !this.value
+                return !this.focus && isEmpty && !this.alwaysShowPrefix
+            },
             phone: {
                 get() {
-                    const prefix = `+${this.callingCode}`
-                    const regex = new RegExp(`^\\${prefix}`)
+                    const regex = new RegExp(`^\\${this.prefix}`)
                     let value = this.number ? this.number.number : this.value
-                    if(!regex.test(value)) value = prefix + value
+                    if(this.hideValue) return ''
+                    if(!regex.test(value)) value = this.prefix + value
                     return new AsYouType().input(value)
                 },
                 set(value) {
-                    const number = parseIncompletePhoneNumber(value)
-                    this.$emit('input', number)
+                    this.setValue(value)
                 }
             },
             example() {
@@ -109,10 +113,24 @@
                 return {
                     'phone-input--valid': this.isValid,
                 }
-            }
+            },
         },
 
         methods: {
+            setValue(value) {
+                this.$emit('input', parseIncompletePhoneNumber(value))
+            },
+
+            onInputBlur () {
+                this.focus = false
+                this.$emit('blur')
+            },
+
+            onInputFocus () {
+                this.focus = true
+                this.$emit('focus')
+            },
+
             onClickOutside() {
                 this.closeDropdown()
             },
@@ -131,7 +149,9 @@
                 this.open = false
             },
             focusInput() {
-                this.$refs.input.focus()
+                this.$nextTick(() => {
+                    this.$refs.input.focus()
+                })
             }
         }
     }
