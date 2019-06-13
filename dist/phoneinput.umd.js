@@ -663,6 +663,14 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "2621":
+/***/ (function(module, exports) {
+
+exports.f = Object.getOwnPropertySymbols;
+
+
+/***/ }),
+
 /***/ "294c":
 /***/ (function(module, exports) {
 
@@ -1637,6 +1645,52 @@ module.exports = function (TO_STRING) {
       : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
   };
 };
+
+
+/***/ }),
+
+/***/ "7333":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// 19.1.2.1 Object.assign(target, source, ...)
+var DESCRIPTORS = __webpack_require__("9e1e");
+var getKeys = __webpack_require__("0d58");
+var gOPS = __webpack_require__("2621");
+var pIE = __webpack_require__("52a7");
+var toObject = __webpack_require__("4bf8");
+var IObject = __webpack_require__("626a");
+var $assign = Object.assign;
+
+// should work with symbols and should have deterministic property order (V8 bug)
+module.exports = !$assign || __webpack_require__("79e5")(function () {
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line no-undef
+  var S = Symbol();
+  var K = 'abcdefghijklmnopqrst';
+  A[S] = 7;
+  K.split('').forEach(function (k) { B[k] = k; });
+  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars
+  var T = toObject(target);
+  var aLen = arguments.length;
+  var index = 1;
+  var getSymbols = gOPS.f;
+  var isEnum = pIE.f;
+  while (aLen > index) {
+    var S = IObject(arguments[index++]);
+    var keys = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || isEnum.call(S, key)) T[key] = S[key];
+    }
+  } return T;
+} : $assign;
 
 
 /***/ }),
@@ -2676,6 +2730,17 @@ var meta = module.exports = {
 
 /***/ }),
 
+/***/ "f751":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.3.1 Object.assign(target, source)
+var $export = __webpack_require__("5ca1");
+
+$export($export.S + $export.F, 'Object', { assign: __webpack_require__("7333") });
+
+
+/***/ }),
+
 /***/ "f772":
 /***/ (function(module, exports) {
 
@@ -2738,15 +2803,27 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cc5e4d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=c3ce2640&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"aria-label":"Выбрать формат номера","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_vm._v("•")])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},model:{value:(_vm.country),callback:function ($$v) {_vm.country=$$v},expression:"country"}},[_c('template',{slot:"singleLabel"},[_vm._v(_vm._s(_vm.getCountryName(_vm.country)))])],2)],1),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.phone),expression:"phone"}],ref:"input",staticClass:"phone-input__input",attrs:{"type":"text"},domProps:{"value":(_vm.phone)},on:{"input":function($event){if($event.target.composing){ return; }_vm.phone=$event.target.value}}})])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cc5e4d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=18972dfe&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"aria-label":"Выбрать формат номера","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_vm._v("•")])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},model:{value:(_vm.country),callback:function ($$v) {_vm.country=$$v},expression:"country"}},[_c('template',{slot:"singleLabel"},[_vm._v(_vm._s(_vm.getCountryName(_vm.country)))])],2)],1),_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.phone),expression:"phone"}],ref:"input",staticClass:"phone-input__input",attrs:{"type":"text"},domProps:{"value":(_vm.phone)},on:{"focus":_vm.onInputFocus,"blur":_vm.onInputBlur,"input":function($event){if($event.target.composing){ return; }_vm.phone=$event.target.value}}},'input',_vm.attrs,false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=c3ce2640&
+// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=18972dfe&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
 var es6_regexp_constructor = __webpack_require__("3b2b");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("f751");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
+var web_dom_iterable = __webpack_require__("ac6a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
+var es6_object_keys = __webpack_require__("456d");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js
 var iterator = __webpack_require__("5d58");
@@ -2775,15 +2852,30 @@ function typeof_typeof(obj) {
 
   return typeof_typeof(obj);
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
-var web_dom_iterable = __webpack_require__("ac6a");
+// CONCATENATED MODULE: ./src/components/PhoneInput/propsMixin.js
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
-var es6_object_keys = __webpack_require__("456d");
-
+/* harmony default export */ var propsMixin = ({
+  props: {
+    defaultCountry: {
+      type: String,
+      default: 'RU'
+    },
+    value: {
+      default: '',
+      validator: function validator(prop) {
+        return ['string', 'number'].indexOf(typeof_typeof(prop)) >= 0 || prop === null;
+      }
+    },
+    focusOnSelect: {
+      type: Boolean,
+      default: false
+    },
+    alwaysShowPrefix: {
+      type: Boolean,
+      default: false
+    }
+  }
+});
 // EXTERNAL MODULE: ./src/components/PhoneInput/locale/ru.json
 var ru = __webpack_require__("6e94");
 
@@ -7339,6 +7431,10 @@ function mobile_formatIncompletePhoneNumber() {
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -7348,34 +7444,16 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
   return key;
 });
 /* harmony default export */ var PhoneInputvue_type_script_lang_js_ = ({
+  mixins: [propsMixin],
   components: {
     Multiselect: external_vue_multiselect_default.a
-  },
-  props: {
-    defaultCountry: {
-      type: String,
-      default: 'RU'
-    },
-    value: {
-      default: '',
-      validator: function validator(prop) {
-        return ['string', 'number'].indexOf(typeof_typeof(prop)) >= 0 || prop === null;
-      }
-    },
-    lang: {
-      type: String,
-      default: 'RU'
-    },
-    focusOnSelect: {
-      type: Boolean,
-      default: false
-    }
   },
   data: function data() {
     return {
       country: this.defaultCountry,
       open: false,
-      countries: countries
+      countries: countries,
+      focus: false
     };
   },
   beforeMount: function beforeMount() {
@@ -7385,17 +7463,27 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     document.removeEventListener('click', this.onClickOutside);
   },
   computed: {
+    attrs: function attrs() {
+      var attrs = Object.assign({}, this.$attrs);
+      return attrs;
+    },
+    prefix: function prefix() {
+      return "+".concat(this.callingCode);
+    },
+    hideValue: function hideValue() {
+      var isEmpty = this.value === this.prefix || !this.value;
+      return !this.focus && isEmpty && !this.alwaysShowPrefix;
+    },
     phone: {
       get: function get() {
-        var prefix = "+".concat(this.callingCode);
-        var regex = new RegExp("^\\".concat(prefix));
+        var regex = new RegExp("^\\".concat(this.prefix));
         var value = this.number ? this.number.number : this.value;
-        if (!regex.test(value)) value = prefix + value;
+        if (this.hideValue) return '';
+        if (!regex.test(value)) value = this.prefix + value;
         return new mobile_AsYouType().input(value);
       },
       set: function set(value) {
-        var number = parseIncompletePhoneNumber(value);
-        this.$emit('input', number);
+        this.setValue(value);
       }
     },
     example: function example() {
@@ -7418,6 +7506,17 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     }
   },
   methods: {
+    setValue: function setValue(value) {
+      this.$emit('input', parseIncompletePhoneNumber(value));
+    },
+    onInputBlur: function onInputBlur() {
+      this.focus = false;
+      this.$emit('blur');
+    },
+    onInputFocus: function onInputFocus() {
+      this.focus = true;
+      this.$emit('focus');
+    },
     onClickOutside: function onClickOutside() {
       this.closeDropdown();
     },
@@ -7436,7 +7535,11 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
       this.open = false;
     },
     focusInput: function focusInput() {
-      this.$refs.input.focus();
+      var _this = this;
+
+      this.$nextTick(function () {
+        _this.$refs.input.focus();
+      });
     }
   }
 });
