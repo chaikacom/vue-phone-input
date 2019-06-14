@@ -2,10 +2,12 @@
     <div class="phone-input" :class="classList">
 
         <button class="phone-input__dropdown-button"
-                v-show="!hideLocale"
-                aria-label="Выбрать формат номера"
-                @click.stop="openDropdown"
-                :tabindex="focusOnSelect ? 0 : -1">
+             @focus="onDropdownFocus"
+             @blur="onDropdownBlur"
+             aria-label="Выбрать формат номера"
+             @click.stop="openDropdown"
+             role="button"
+             :tabindex="focusOnSelect ? 0 : -1">
             <slot name="caret">
                 <span class="phone-input__dropdown-button-icon iti-flag" :class="country.toLowerCase()"></span>
             </slot>
@@ -45,6 +47,8 @@
 </template>
 
 <script>
+    import { EVT_OPEN_DROPDOWN, EVT_CLOSE_DROPDOWN, EVT_INPUT, EVT_VALIDATE } from './events'
+    import focusMixin from './focusMixin'
     import propsMixin from './propsMixin'
     import locale from './locale/ru.json'
     import Multiselect from 'vue-multiselect'
@@ -61,7 +65,7 @@
     const countries = Object.keys(meta.countries).map(key => key)
 
     export default {
-        mixins: [propsMixin],
+        mixins: [ propsMixin, focusMixin ],
         components: {
             Multiselect
         },
@@ -71,7 +75,6 @@
                 country: this.defaultCountry,
                 open: false,
                 countries,
-                focus: false,
             }
         },
 
@@ -85,8 +88,8 @@
         },
 
         computed: {
-            hideLocale () {
-                return this.compactView && !this.focus && !this.open
+            commonFocus () {
+                return this.focus || this.focusDropdown || this.open
             },
             attrs () {
                 const { ...attrs } = this.$attrs
@@ -122,11 +125,14 @@
             },
             isValid() {
                 const valid = !this.number || !this.number.isValid()  ? false : true
-                this.$emit('validation', valid)
+                this.$emit(EVT_VALIDATE, valid)
                 return valid
             },
             classList() {
                 return {
+                    'phone-input--normal': !this.compactView,
+                    'phone-input--compact': this.compactView,
+                    'phone-input--focus': this.commonFocus,
                     'phone-input--valid': this.isValid,
                 }
             },
@@ -134,19 +140,8 @@
 
         methods: {
             setValue(value) {
-                this.$emit('input', parseIncompletePhoneNumber(value))
+                this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value))
             },
-
-            onInputBlur () {
-                this.focus = false
-                this.$emit('blur')
-            },
-
-            onInputFocus () {
-                this.focus = true
-                this.$emit('focus')
-            },
-
             onClickOutside() {
                 this.closeDropdown()
             },
@@ -159,10 +154,12 @@
             openDropdown() {
                 this.open = true
                 this.$refs.dropdown.isOpen = true
+                this.$emit(EVT_OPEN_DROPDOWN)
             },
             closeDropdown() {
                 this.$refs.dropdown.isOpen = false
                 this.open = false
+                this.$emit(EVT_CLOSE_DROPDOWN)
             },
             focusInput() {
                 this.$nextTick(() => {
@@ -175,5 +172,6 @@
 
 <style lang="scss">
     @import "./stylesheets/index.scss";
+    @import "./stylesheets/compact.scss";
     @import "./stylesheets/sprite.scss";
 </style>

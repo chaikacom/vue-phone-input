@@ -1,0 +1,17 @@
+.phone-input--compact .phone-input__dropdown-button {
+    transition: 0.1s opacity;
+    opacity: 0;
+}
+
+.phone-input--compact.phone-input--focus .phone-input__dropdown-button {
+    opacity: 1;
+}
+
+
+.phone-input--compact .phone-input__input {
+    //padding-left: 0;
+}
+
+.phone-input--compact.phone-input--focus .phone-input__input {
+    padding-left: 2.5em;
+}

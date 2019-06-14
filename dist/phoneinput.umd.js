@@ -2803,14 +2803,14 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cc5e4d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=30c54b18&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList},[_c('button',{directives:[{name:"show",rawName:"v-show",value:(!_vm.hideLocale),expression:"!hideLocale"}],staticClass:"phone-input__dropdown-button",attrs:{"aria-label":"Выбрать формат номера","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_c('span',{staticClass:"phone-input__dropdown-button-icon iti-flag",class:_vm.country.toLowerCase()})])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},scopedSlots:_vm._u([{key:"option",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"cc5e4d04-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=29e892a3&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"aria-label":"Выбрать формат номера","role":"button","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"focus":_vm.onDropdownFocus,"blur":_vm.onDropdownBlur,"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_c('span',{staticClass:"phone-input__dropdown-button-icon iti-flag",class:_vm.country.toLowerCase()})])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},scopedSlots:_vm._u([{key:"option",fn:function(ref){
 var option = ref.option;
 return [_c('div',{staticClass:"phone-input__dropdown-option"},[_c('span',{staticClass:"phone-input__dropdown-option-name"},[_vm._v(_vm._s(_vm.getCountryName(option)))]),_c('span',{staticClass:"phone-input__dropdown-options-code"},[_vm._v("+"+_vm._s(_vm.getCountryCallingCode(option)))])])]}}]),model:{value:(_vm.country),callback:function ($$v) {_vm.country=$$v},expression:"country"}},[_c('template',{slot:"singleLabel"},[_vm._v("\n                "+_vm._s(_vm.getCountryName(_vm.country))+"\n            ")])],2)],1),_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.phone),expression:"phone"}],ref:"input",staticClass:"phone-input__input",attrs:{"type":"text"},domProps:{"value":(_vm.phone)},on:{"focus":_vm.onInputFocus,"blur":_vm.onInputBlur,"input":function($event){if($event.target.composing){ return; }_vm.phone=$event.target.value}}},'input',_vm.attrs,false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=30c54b18&
+// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=29e892a3&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
 var es6_regexp_constructor = __webpack_require__("3b2b");
@@ -2827,6 +2827,51 @@ var es6_array_iterator = __webpack_require__("cadf");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.keys.js
 var es6_object_keys = __webpack_require__("456d");
 
+// CONCATENATED MODULE: ./src/components/PhoneInput/events.js
+var EVT_OPEN_DROPDOWN = 'open:dropdown';
+var EVT_CLOSE_DROPDOWN = 'open:dropdown';
+var EVT_FOCUS_INPUT = 'focus';
+var EVT_BLUR_INPUT = 'blur';
+var EVT_FOCUS_DROPDOWN = 'focus:dropdown';
+var EVT_BLUR_DROPDOWN = 'focus:dropdown';
+var EVT_INPUT = 'input';
+var EVT_VALIDATE = 'validate';
+/* harmony default export */ var events = ({
+  EVT_OPEN_DROPDOWN: EVT_OPEN_DROPDOWN,
+  EVT_CLOSE_DROPDOWN: EVT_CLOSE_DROPDOWN,
+  EVT_FOCUS_INPUT: EVT_FOCUS_INPUT,
+  EVT_BLUR_INPUT: EVT_BLUR_INPUT,
+  EVT_FOCUS_DROPDOWN: EVT_FOCUS_DROPDOWN,
+  EVT_BLUR_DROPDOWN: EVT_BLUR_DROPDOWN
+});
+// CONCATENATED MODULE: ./src/components/PhoneInput/focusMixin.js
+
+/* harmony default export */ var focusMixin = ({
+  data: function data() {
+    return {
+      focus: false,
+      focusDropdown: false
+    };
+  },
+  methods: {
+    onDropdownFocus: function onDropdownFocus() {
+      this.focusDropdown = true;
+      this.$emit(EVT_FOCUS_DROPDOWN);
+    },
+    onDropdownBlur: function onDropdownBlur() {
+      this.focusDropdown = false;
+      this.$emit(EVT_BLUR_DROPDOWN);
+    },
+    onInputFocus: function onInputFocus() {
+      this.focus = true;
+      this.$emit(EVT_FOCUS_INPUT);
+    },
+    onInputBlur: function onInputBlur() {
+      this.focus = false;
+      this.$emit(EVT_BLUR_INPUT);
+    }
+  }
+});
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js
 var iterator = __webpack_require__("5d58");
 var iterator_default = /*#__PURE__*/__webpack_require__.n(iterator);
@@ -7451,6 +7496,10 @@ function mobile_formatIncompletePhoneNumber() {
 //
 //
 //
+//
+//
+
+
 
 
 
@@ -7461,7 +7510,7 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
   return key;
 });
 /* harmony default export */ var PhoneInputvue_type_script_lang_js_ = ({
-  mixins: [propsMixin],
+  mixins: [propsMixin, focusMixin],
   components: {
     Multiselect: external_vue_multiselect_default.a
   },
@@ -7469,8 +7518,7 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     return {
       country: this.defaultCountry,
       open: false,
-      countries: countries,
-      focus: false
+      countries: countries
     };
   },
   beforeMount: function beforeMount() {
@@ -7480,8 +7528,8 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     document.removeEventListener('click', this.onClickOutside);
   },
   computed: {
-    hideLocale: function hideLocale() {
-      return this.compactView && !this.focus && !this.open;
+    commonFocus: function commonFocus() {
+      return this.focus || this.focusDropdown || this.open;
     },
     attrs: function attrs() {
       var attrs = Object.assign({}, this.$attrs);
@@ -7517,26 +7565,21 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     },
     isValid: function isValid() {
       var valid = !this.number || !this.number.isValid() ? false : true;
-      this.$emit('validation', valid);
+      this.$emit(EVT_VALIDATE, valid);
       return valid;
     },
     classList: function classList() {
       return {
+        'phone-input--normal': !this.compactView,
+        'phone-input--compact': this.compactView,
+        'phone-input--focus': this.commonFocus,
         'phone-input--valid': this.isValid
       };
     }
   },
   methods: {
     setValue: function setValue(value) {
-      this.$emit('input', parseIncompletePhoneNumber(value));
-    },
-    onInputBlur: function onInputBlur() {
-      this.focus = false;
-      this.$emit('blur');
-    },
-    onInputFocus: function onInputFocus() {
-      this.focus = true;
-      this.$emit('focus');
+      this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value));
     },
     onClickOutside: function onClickOutside() {
       this.closeDropdown();
@@ -7550,10 +7593,12 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     openDropdown: function openDropdown() {
       this.open = true;
       this.$refs.dropdown.isOpen = true;
+      this.$emit(EVT_OPEN_DROPDOWN);
     },
     closeDropdown: function closeDropdown() {
       this.$refs.dropdown.isOpen = false;
       this.open = false;
+      this.$emit(EVT_CLOSE_DROPDOWN);
     },
     focusInput: function focusInput() {
       var _this = this;
