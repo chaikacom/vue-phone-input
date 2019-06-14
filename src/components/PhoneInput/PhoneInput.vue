@@ -24,6 +24,9 @@
                          class="phone-input__select"
                          :custom-label="getCountryName"
                          v-model="country">
+                <template slot="noResult">
+                    Ничего не найдено
+                </template>
                 <template slot="singleLabel">
                     {{ getCountryName(country) }}
                 </template>
