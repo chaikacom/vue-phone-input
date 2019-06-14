@@ -7,6 +7,7 @@
     "build": "vue-cli-service build --target lib --name phoneinput ./src/components/PhoneInput/PhoneInput.vue",
     "lint": "vue-cli-service lint"
   },
+  "main": "dist/phoneinput.common.js",
   "dependencies": {
     "libphonenumber-js": "^1.7.18",
     "vue": "^2.6.10",
