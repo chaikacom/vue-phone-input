@@ -20,6 +20,11 @@ export default {
         alwaysShowPrefix: {
             type: Boolean,
             default: false
+        },
+
+        compactView: {
+            type: Boolean,
+            default: false
         }
     }
 }

@@ -2,6 +2,7 @@
     <div class="phone-input" :class="classList">
 
         <button class="phone-input__dropdown-button"
+                v-show="!hideLocale"
                 aria-label="Выбрать формат номера"
                 @click.stop="openDropdown"
                 :tabindex="focusOnSelect ? 0 : -1">
@@ -84,6 +85,9 @@
         },
 
         computed: {
+            hideLocale () {
+                return this.compactView && !this.focus && !this.open
+            },
             attrs () {
                 const { ...attrs } = this.$attrs
                 return attrs
