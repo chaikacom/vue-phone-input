@@ -2,12 +2,13 @@
     <div class="phone-input" :class="classList">
 
         <button class="phone-input__dropdown-button"
-             @focus="onDropdownFocus"
-             @blur="onDropdownBlur"
-             aria-label="Выбрать формат номера"
-             @click.stop="openDropdown"
-             role="button"
-             :tabindex="focusOnSelect ? 0 : -1">
+                type="button"
+                @focus="onDropdownFocus"
+                @blur="onDropdownBlur"
+                aria-label="Выбрать формат номера"
+                @click.stop="openDropdown"
+                role="button"
+                :tabindex="focusOnSelect ? 0 : -1">
             <slot name="caret">
                 <span class="phone-input__dropdown-button-icon iti-flag" :class="country.toLowerCase()"></span>
             </slot>
