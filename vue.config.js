@@ -2,6 +2,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const isDev = process.env.NODE_ENV !== 'production'
 const externals = {
     "vue-multiselect": "vue-multiselect",
+    "libphonenumber-js": "libphonenumber-js"
 }
 
 const plugins = []

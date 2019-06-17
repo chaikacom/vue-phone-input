@@ -25,6 +25,11 @@ export default {
         compactView: {
             type: Boolean,
             default: false
+        },
+
+        type: {
+            type: String,
+            default: 'tel'
         }
     }
 }

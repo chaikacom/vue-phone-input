@@ -40,7 +40,7 @@
             </multiselect>
         </div>
 
-        <input type="text"
+        <input type="type"
                ref="input"
                v-model="phone"
                v-bind="attrs"
@@ -56,15 +56,13 @@
     import propsMixin from './propsMixin'
     import locale from './locale/ru.json'
     import Multiselect from 'vue-multiselect'
-    import examples from 'libphonenumber-js/examples.mobile.json.js'
     import meta from 'libphonenumber-js/metadata.mobile.json.js'
     import {
         parsePhoneNumberFromString,
         AsYouType,
         parseIncompletePhoneNumber,
         getCountryCallingCode,
-        getExampleNumber
-    } from 'libphonenumber-js/mobile'
+    } from 'libphonenumber-js/bundle/libphonenumber-min'
 
     const countries = Object.keys(meta.countries).map(key => key)
 
@@ -117,9 +115,6 @@
                 set(value) {
                     this.setValue(value)
                 }
-            },
-            example() {
-                return getExampleNumber(this.country, examples).formatInternational()
             },
             callingCode() {
                 return getCountryCallingCode(this.country)
