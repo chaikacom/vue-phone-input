@@ -63,7 +63,14 @@
     import getCountryCallingCode from 'libphonenumber-js/es6/getCountryCallingCode'
     import meta from 'libphonenumber-js/metadata.mobile.json.js'
 
+    /* Добавляем только те страны, что имеются в нашем списке и сортируем в алфвитном порядке */
     const countries = Object.keys(meta.countries).map(key => key)
+        .filter(key => !!locale[key])
+        .sort((prev, next) => {
+            if (locale[prev] < locale[next]) return -1
+            if (locale[prev] > locale[next]) return 1
+            return 0
+        })
 
     export default {
         mixins: [ propsMixin, focusMixin ],
