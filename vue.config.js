@@ -5,10 +5,9 @@ const externals = {
     "libphonenumber-js": "libphonenumber-js"
 }
 
-const plugins = []
+const plugins = [new BundleAnalyzerPlugin]
 
-if(!isDev) plugins.push(new BundleAnalyzerPlugin)
-
+// if(!isDev) plugins.push()
 
 module.exports = {
     configureWebpack: {

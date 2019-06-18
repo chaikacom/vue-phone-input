@@ -56,13 +56,12 @@
     import propsMixin from './propsMixin'
     import locale from './locale/ru.json'
     import Multiselect from 'vue-multiselect'
+
+    import parsePhoneNumberFromString from 'libphonenumber-js/es6/parsePhoneNumberFromString'
+    import AsYouType from 'libphonenumber-js/es6/AsYouType'
+    import parseIncompletePhoneNumber from 'libphonenumber-js/es6/parseIncompletePhoneNumber'
+    import getCountryCallingCode from 'libphonenumber-js/es6/getCountryCallingCode'
     import meta from 'libphonenumber-js/metadata.mobile.json.js'
-    import {
-        parsePhoneNumberFromString,
-        AsYouType,
-        parseIncompletePhoneNumber,
-        getCountryCallingCode,
-    } from 'libphonenumber-js/bundle/libphonenumber-min'
 
     const countries = Object.keys(meta.countries).map(key => key)
 
@@ -110,17 +109,17 @@
                     let value = this.number ? this.number.number : this.value
                     if(this.hideValue) return ''
                     if(!regex.test(value)) value = this.prefix + value
-                    return new AsYouType().input(value)
+                    return new AsYouType(null, meta).input(value)
                 },
                 set(value) {
                     this.setValue(value)
                 }
             },
             callingCode() {
-                return getCountryCallingCode(this.country)
+                return getCountryCallingCode(this.country, meta)
             },
             number() {
-                return parsePhoneNumberFromString(String(this.value), this.country)
+                return parsePhoneNumberFromString(String(this.value), this.country, meta)
             },
             isValid() {
                 const valid = !this.number || !this.number.isValid()  ? false : true
@@ -139,13 +138,13 @@
 
         methods: {
             setValue(value) {
-                this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value))
+                this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value, meta))
             },
             onClickOutside() {
                 this.closeDropdown()
             },
             getCountryCallingCode(country) {
-                return getCountryCallingCode(country)
+                return getCountryCallingCode(country, meta)
             },
             getCountryName(country) {
                 return locale[country]
