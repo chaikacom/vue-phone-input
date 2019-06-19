@@ -1,10 +1,14 @@
 .phone-input--compact .phone-input__dropdown-button {
-    transition: 0.1s opacity;
     opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
 
 .phone-input--compact.phone-input--focus .phone-input__dropdown-button {
     opacity: 1;
+    width: auto;
+    height: auto;
 }
 
 
