@@ -6,6 +6,8 @@ export const EVT_FOCUS_DROPDOWN = 'focus:dropdown'
 export const EVT_BLUR_DROPDOWN  = 'focus:dropdown'
 export const EVT_INPUT          = 'input'
 export const EVT_VALIDATE       = 'validate'
+export const EVT_FOCUS_IN       = 'focusin'
+export const EVT_FOCUS_OUT      = 'focusout'
 
 export default {
     EVT_OPEN_DROPDOWN,
@@ -14,4 +16,6 @@ export default {
     EVT_BLUR_INPUT,
     EVT_FOCUS_DROPDOWN,
     EVT_BLUR_DROPDOWN,
+    EVT_FOCUS_IN,
+    EVT_FOCUS_OUT
 }

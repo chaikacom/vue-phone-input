@@ -1,5 +1,5 @@
 <template>
-    <div class="phone-input" :class="classList">
+    <div class="phone-input" :class="classList" @focusout="onFocusOut" @focusin="onFocusIn">
 
         <button class="phone-input__dropdown-button"
                 type="button"
@@ -96,9 +96,6 @@
         },
 
         computed: {
-            commonFocus () {
-                return this.focus || this.focusDropdown || this.open
-            },
             attrs () {
                 const { ...attrs } = this.$attrs
                 return attrs
@@ -137,7 +134,7 @@
                 return {
                     'phone-input--normal': !this.compactView,
                     'phone-input--compact': this.compactView,
-                    'phone-input--focus': this.commonFocus,
+                    'phone-input--focus': this.focusCommon,
                     'phone-input--valid': this.isValid,
                 }
             },
