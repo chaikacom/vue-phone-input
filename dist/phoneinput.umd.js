@@ -2851,14 +2851,14 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48392159-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=40b94f9a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"type":"button","aria-label":"Выбрать формат номера","role":"button","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"focus":_vm.onDropdownFocus,"blur":_vm.onDropdownBlur,"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_c('span',{staticClass:"phone-input__dropdown-button-icon iti-flag",class:_vm.country.toLowerCase()})])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},scopedSlots:_vm._u([{key:"option",fn:function(ref){
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"48392159-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=9fc4fed4&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList,on:{"focusout":_vm.onFocusOut,"focusin":_vm.onFocusIn}},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"type":"button","aria-label":"Выбрать формат номера","role":"button","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"focus":_vm.onDropdownFocus,"blur":_vm.onDropdownBlur,"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_c('span',{staticClass:"phone-input__dropdown-button-icon iti-flag",class:_vm.country.toLowerCase()})])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},scopedSlots:_vm._u([{key:"option",fn:function(ref){
 var option = ref.option;
 return [_c('div',{staticClass:"phone-input__dropdown-option"},[_c('span',{staticClass:"phone-input__dropdown-option-name"},[_vm._v(_vm._s(_vm.getCountryName(option)))]),_c('span',{staticClass:"phone-input__dropdown-options-code"},[_vm._v("+"+_vm._s(_vm.getCountryCallingCode(option)))])])]}}]),model:{value:(_vm.country),callback:function ($$v) {_vm.country=$$v},expression:"country"}},[_c('template',{slot:"noResult"},[_vm._v("\n                Ничего не найдено\n            ")]),_c('template',{slot:"singleLabel"},[_vm._v("\n                "+_vm._s(_vm.getCountryName(_vm.country))+"\n            ")])],2)],1),_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.phone),expression:"phone"}],ref:"input",staticClass:"phone-input__input",attrs:{"type":"type"},domProps:{"value":(_vm.phone)},on:{"focus":_vm.onInputFocus,"blur":_vm.onInputBlur,"input":function($event){if($event.target.composing){ return; }_vm.phone=$event.target.value}}},'input',_vm.attrs,false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=40b94f9a&
+// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=9fc4fed4&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
 var es6_regexp_constructor = __webpack_require__("3b2b");
@@ -2887,13 +2887,17 @@ var EVT_FOCUS_DROPDOWN = 'focus:dropdown';
 var EVT_BLUR_DROPDOWN = 'focus:dropdown';
 var EVT_INPUT = 'input';
 var EVT_VALIDATE = 'validate';
+var EVT_FOCUS_IN = 'focusin';
+var EVT_FOCUS_OUT = 'focusout';
 /* harmony default export */ var events = ({
   EVT_OPEN_DROPDOWN: EVT_OPEN_DROPDOWN,
   EVT_CLOSE_DROPDOWN: EVT_CLOSE_DROPDOWN,
   EVT_FOCUS_INPUT: EVT_FOCUS_INPUT,
   EVT_BLUR_INPUT: EVT_BLUR_INPUT,
   EVT_FOCUS_DROPDOWN: EVT_FOCUS_DROPDOWN,
-  EVT_BLUR_DROPDOWN: EVT_BLUR_DROPDOWN
+  EVT_BLUR_DROPDOWN: EVT_BLUR_DROPDOWN,
+  EVT_FOCUS_IN: EVT_FOCUS_IN,
+  EVT_FOCUS_OUT: EVT_FOCUS_OUT
 });
 // CONCATENATED MODULE: ./src/components/PhoneInput/focusMixin.js
 
@@ -2901,8 +2905,14 @@ var EVT_VALIDATE = 'validate';
   data: function data() {
     return {
       focus: false,
-      focusDropdown: false
+      focusDropdown: false,
+      focusCommon: false
     };
+  },
+  watch: {
+    focusCommon: function focusCommon(value) {
+      this.$emit(value ? EVT_FOCUS_IN : EVT_FOCUS_OUT);
+    }
   },
   methods: {
     onDropdownFocus: function onDropdownFocus() {
@@ -2920,6 +2930,15 @@ var EVT_VALIDATE = 'validate';
     onInputBlur: function onInputBlur() {
       this.focus = false;
       this.$emit(EVT_BLUR_INPUT);
+    },
+    onFocusOut: function onFocusOut(e) {
+      var isOutside = !e.relatedTarget || !this.$el.contains(e.relatedTarget);
+      if (!isOutside) return;
+      this.focusCommon = false;
+      this.open = false;
+    },
+    onFocusIn: function onFocusIn() {
+      this.focusCommon = true;
     }
   }
 });
@@ -6523,9 +6542,6 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     document.removeEventListener('click', this.onClickOutside);
   },
   computed: {
-    commonFocus: function commonFocus() {
-      return this.focus || this.focusDropdown || this.open;
-    },
     attrs: function attrs() {
       var attrs = Object.assign({}, this.$attrs);
       return attrs;
@@ -6564,7 +6580,7 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
       return {
         'phone-input--normal': !this.compactView,
         'phone-input--compact': this.compactView,
-        'phone-input--focus': this.commonFocus,
+        'phone-input--focus': this.focusCommon,
         'phone-input--valid': this.isValid
       };
     }
