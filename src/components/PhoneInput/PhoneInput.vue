@@ -164,9 +164,7 @@
                 this.$emit(EVT_CLOSE_DROPDOWN)
             },
             focusInput() {
-                this.$nextTick(() => {
-                    this.$refs.input.focus()
-                })
+                this.$refs.input.focus()
             }
         }
     }

@@ -11,7 +11,7 @@
   "dependencies": {
     "libphonenumber-js": "^1.7.18",
     "vue": "^2.6.10",
-    "vue-multiselect": "^2.1.6"
+    "vue-multiselect": "github:fasteasy/vue-multiselect#2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",

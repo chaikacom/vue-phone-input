@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <div>
-      <phone-input v-model="phone" focus-on-select compact-view always-show-prefix></phone-input>
+      <phone-input v-model="phone" focus-on-select compact-view always-show-prefix @focusout="onFocusOut"></phone-input>
     </div>
   </div>
 </template>
