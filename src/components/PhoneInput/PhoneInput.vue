@@ -86,6 +86,9 @@
             }
         },
 
+        created () {
+            this.detectCountry()
+        },
 
         beforeMount() {
             document.addEventListener('click', this.onClickOutside)
@@ -141,6 +144,10 @@
         },
 
         methods: {
+            detectCountry () {
+                const number = parsePhoneNumberFromString(String(this.value), null, meta)
+                this.country = number ? number.country : this.country
+            },
             setValue(value) {
                 this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value, meta))
             },

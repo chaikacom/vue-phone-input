@@ -2851,14 +2851,14 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"64e0e0ec-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=75a6a713&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"64e0e0ec-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=3163cd62&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"phone-input",class:_vm.classList,on:{"focusout":_vm.onFocusOut,"focusin":_vm.onFocusIn}},[_c('button',{staticClass:"phone-input__dropdown-button",attrs:{"type":"button","aria-label":"Выбрать формат номера","role":"button","tabindex":_vm.focusOnSelect ? 0 : -1},on:{"focus":_vm.onDropdownFocus,"blur":_vm.onDropdownBlur,"click":function($event){$event.stopPropagation();return _vm.openDropdown($event)}}},[_vm._t("caret",[_c('span',{staticClass:"phone-input__dropdown-button-icon iti-flag",class:_vm.country.toLowerCase()})])],2),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],staticClass:"phone-input__dropdown",on:{"click":function($event){$event.stopPropagation();}}},[_c('multiselect',{ref:"dropdown",staticClass:"phone-input__select",attrs:{"options":_vm.countries,"show-labels":false,"allow-empty":false,"placeholder":"","custom-label":_vm.getCountryName},on:{"select":_vm.focusInput,"close":_vm.closeDropdown},scopedSlots:_vm._u([{key:"option",fn:function(ref){
 var option = ref.option;
 return [_c('div',{staticClass:"phone-input__dropdown-option"},[_c('span',{staticClass:"phone-input__dropdown-option-name"},[_vm._v(_vm._s(_vm.getCountryName(option)))]),_c('span',{staticClass:"phone-input__dropdown-options-code"},[_vm._v("+"+_vm._s(_vm.getCountryCallingCode(option)))])])]}}]),model:{value:(_vm.country),callback:function ($$v) {_vm.country=$$v},expression:"country"}},[_c('template',{slot:"noResult"},[_vm._v("\n                Ничего не найдено\n            ")]),_c('template',{slot:"singleLabel"},[_vm._v("\n                "+_vm._s(_vm.getCountryName(_vm.country))+"\n            ")])],2)],1),_c('input',_vm._b({directives:[{name:"model",rawName:"v-model",value:(_vm.phone),expression:"phone"}],ref:"input",staticClass:"phone-input__input",attrs:{"type":"type"},domProps:{"value":(_vm.phone)},on:{"focus":_vm.onInputFocus,"blur":_vm.onInputBlur,"input":function($event){if($event.target.composing){ return; }_vm.phone=$event.target.value}}},'input',_vm.attrs,false))])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=75a6a713&
+// CONCATENATED MODULE: ./src/components/PhoneInput/PhoneInput.vue?vue&type=template&id=3163cd62&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
 var es6_regexp_constructor = __webpack_require__("3b2b");
@@ -6535,6 +6535,9 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
       countries: countries
     };
   },
+  created: function created() {
+    this.detectCountry();
+  },
   beforeMount: function beforeMount() {
     document.addEventListener('click', this.onClickOutside);
   },
@@ -6586,6 +6589,10 @@ var countries = Object.keys(metadata_mobile_json.countries).map(function (key) {
     }
   },
   methods: {
+    detectCountry: function detectCountry() {
+      var number = parsePhoneNumberFromString_parsePhoneNumberFromString(String(this.value), null, metadata_mobile_json);
+      this.country = number ? number.country : this.country;
+    },
     setValue: function setValue(value) {
       this.$emit(EVT_INPUT, parseIncompletePhoneNumber(value, metadata_mobile_json));
     },
