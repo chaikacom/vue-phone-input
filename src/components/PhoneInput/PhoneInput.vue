@@ -78,6 +78,14 @@
             Multiselect
         },
 
+        watch: {
+            value () {
+                if(this.number && this.number.country) {
+                    this.country = this.number.country
+                }
+            }
+        },
+
         data() {
             return {
                 country: this.defaultCountry,
