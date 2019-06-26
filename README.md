@@ -10,11 +10,11 @@ Hide flag if component not in focus
 ### type
 input type. By default `type="tel"`
 
-# Todo
+
+## Todo
 - [ ] Sort countries in dropdown
 - [ ] Internationalization 
 
-# phone-input
 
 ## Project setup
 ```
