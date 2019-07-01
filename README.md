@@ -1,7 +1,7 @@
 ## Props
 ### defaultCountry
 'RU', 'EN', 'USA', 'FR', etc.
-### focusOnSelect
+### ~~focusOnSelect~~
 Skip flag icon from tab-button navigation
 ### alwaysShowPrefix
 Show prefix only if component has focus 

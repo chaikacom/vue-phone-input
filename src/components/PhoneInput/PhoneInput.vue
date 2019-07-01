@@ -1,18 +1,19 @@
 <template>
     <div class="phone-input" :class="classList" @focusout="onFocusOut" @focusin="onFocusIn">
 
-        <button class="phone-input__dropdown-button"
+        <span class="phone-input__dropdown-button"
                 type="button"
                 @focus="onDropdownFocus"
                 @blur="onDropdownBlur"
                 aria-label="Выбрать формат номера"
+                @keypress.space.stop="openDropdown"
                 @click.stop="openDropdown"
                 role="button"
-                :tabindex="focusOnSelect ? 0 : -1">
+                :tabindex="0">
             <slot name="caret">
                 <span class="phone-input__dropdown-button-icon iti-flag" :class="country.toLowerCase()"></span>
             </slot>
-        </button>
+        </span>
 
         <div class="phone-input__dropdown" v-show="open" @click.stop>
             <multiselect :options="countries"

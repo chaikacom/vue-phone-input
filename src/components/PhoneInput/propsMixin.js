@@ -12,10 +12,10 @@ export default {
             }
         },
 
-        focusOnSelect: {
-            type: Boolean,
-            default: false
-        },
+        // focusOnSelect: {
+        //     type: Boolean,
+        //     default: false
+        // },
 
         alwaysShowPrefix: {
             type: Boolean,
