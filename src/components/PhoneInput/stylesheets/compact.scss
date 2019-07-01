@@ -3,12 +3,26 @@
     width: 1px;
     height: 1px;
     overflow: hidden;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    transform: none
+}
+
+
+.phone-input--compact .phone-input__dropdown-button-icon {
+    position: absolute;
+    top: 50%;
+    left: 0.5em;
+    transform: translateY(-50%)
 }
 
 .phone-input--compact.phone-input--focus .phone-input__dropdown-button {
     opacity: 1;
-    width: auto;
-    height: auto;
+    height: 100%;
+    width: 2.5em;
 }
 
 

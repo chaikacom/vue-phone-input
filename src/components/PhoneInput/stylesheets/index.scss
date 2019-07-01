@@ -22,6 +22,8 @@
   padding: 0;
   margin: 0;
   -webkit-appearance: none;
+
+
 }
 
 .phone-input__dropdown-button-icon {
@@ -46,6 +48,10 @@
 
 
 .phone-input__input {
+
+  &:-webkit-autofill {
+    font-family: inherit;
+  }
 
   .phone-input--normal & {
     padding-left: 2.5em;

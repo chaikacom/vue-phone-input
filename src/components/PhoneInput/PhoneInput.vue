@@ -2,7 +2,6 @@
     <div class="phone-input" :class="classList" @focusout="onFocusOut" @focusin="onFocusIn">
 
         <span class="phone-input__dropdown-button"
-                type="button"
                 @focus="onDropdownFocus"
                 @blur="onDropdownBlur"
                 aria-label="Выбрать формат номера"
