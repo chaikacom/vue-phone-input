@@ -40,7 +40,7 @@
             </multiselect>
         </div>
 
-        <input type="type"
+        <input :type="type"
                ref="input"
                v-model="phone"
                v-bind="attrs"
