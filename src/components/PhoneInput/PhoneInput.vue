@@ -124,6 +124,7 @@
                     let value = this.number ? this.number.number : this.value
                     if(this.hideValue) return ''
                     if(!regex.test(value)) value = this.prefix + value
+                    this.setValue(value)
                     return new AsYouType(null, meta).input(value)
                 },
                 set(value) {
