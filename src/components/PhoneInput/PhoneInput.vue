@@ -19,7 +19,7 @@
                          ref="dropdown"
                          :show-labels="false"
                          :allow-empty="false"
-                         @select="focusInput"
+                         @select="focus"
                          placeholder=""
                          @close="closeDropdown"
                          class="phone-input__select"
@@ -116,7 +116,7 @@
             },
             hideValue () {
                 const isEmpty = this.value === this.prefix || !this.value
-                return !this.focus && isEmpty && !this.alwaysShowPrefix
+                return !this.inFocus && isEmpty && !this.alwaysShowPrefix
             },
             phone: {
                 get() {
@@ -179,7 +179,7 @@
                 this.open = false
                 this.$emit(EVT_CLOSE_DROPDOWN)
             },
-            focusInput() {
+            focus() {
                 this.$refs.input.focus()
             }
         }

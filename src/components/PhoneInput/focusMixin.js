@@ -3,7 +3,7 @@ import { EVT_FOCUS_DROPDOWN, EVT_BLUR_DROPDOWN, EVT_BLUR_INPUT, EVT_FOCUS_INPUT,
 export default {
     data () {
         return {
-            focus: false,
+            inFocus: false,
             focusDropdown: false,
             focusCommon: false,
         }
@@ -27,12 +27,12 @@ export default {
         },
 
         onInputFocus () {
-            this.focus = true
+            this.inFocus = true
             this.$emit(EVT_FOCUS_INPUT)
         },
 
         onInputBlur () {
-            this.focus = false
+            this.inFocus = false
             this.$emit(EVT_BLUR_INPUT)
         },
 

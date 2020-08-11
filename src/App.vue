@@ -2,8 +2,9 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <div>
-      <phone-input v-model="phone" focus-on-select compact-view always-show-prefix></phone-input>
+      <phone-input v-model="phone" ref="phone" focus-on-select compact-view always-show-prefix></phone-input>
     </div>
+    <a href="https://google.com" target="_blank">go</a>
   </div>
 </template>
 
@@ -19,6 +20,9 @@ export default {
     return {
         phone: null,
     }
+  },
+  mounted () {
+      this.$refs.phone.focus()
   }
 }
 </script>
